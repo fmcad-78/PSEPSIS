@@ -1,0 +1,3 @@
+#!/bin/bash
+
+docker run -p 22222:22222 -p 22223:22223 -p 22224:22224 -p 22225:22225 --name=frontend -it -v `pwd`:"/home/$(whoami)/PSEPSIS" -w "/home/$(whoami)/PSEPSIS" frontend-with-k:latest

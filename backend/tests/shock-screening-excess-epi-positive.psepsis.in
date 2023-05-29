@@ -1,0 +1,42 @@
+[
+  {
+    "id": "tabletApp",
+    "action": "broadcast",
+    "eventName": "StartScreening",
+    "eventArgs": []
+  },
+  {
+    "id": "tabletApp",
+    "action": "broadcast",
+    "eventName": "AgeEntered",
+    "eventArgs": [300],
+    "waitFor":
+     {
+       "name": "Instruct",
+       "args": ["get age"]
+     }
+  },
+  {
+    "id": "tabletApp",
+    "action": "broadcast",
+    "eventName": "SepsisSuspected",
+    "eventArgs": [],
+    "waitFor": {
+      "name": "Instruct",
+      "args": ["get weight"]
+    }
+  },
+  {
+    "action":"exit",
+    "waitFor": {
+      "name": "Instruct",
+      "args": [
+        "manage shock",
+        "Call PICU if not already done",
+        "Switch to 1-hour bundle",
+        "Urgently consider Fluid Therapy",
+        "Urgently consider Antibiotic Therapy"
+      ]
+    }
+  }
+]

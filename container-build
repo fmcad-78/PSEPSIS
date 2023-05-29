@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+cd ~/PSEPSIS/backend/ext/medik-semantics && make build-deps && make build-execution && make build-model-check
+cd ~/PSEPSIS/backend && pytest test_backend.py
+

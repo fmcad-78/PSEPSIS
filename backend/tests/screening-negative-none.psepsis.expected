@@ -1,0 +1,116 @@
+[
+  {
+    "id": "tabletApp",
+    "interface": "TabletApp",
+    "name": "Instruct",
+    "args": [
+      "get age"
+    ]
+  },
+  {
+    "id": "tabletApp",
+    "interface": "TabletApp",
+    "name": "ConfirmAgeEntered",
+    "args": []
+  },
+  {
+    "id": "tabletApp",
+    "interface": "TabletApp",
+    "name": "Instruct",
+    "args": [
+      "get weight"
+    ]
+  },
+  {
+    "id": "tabletApp",
+    "interface": "TabletApp",
+    "name": "ConfirmWeightEntered",
+    "args": []
+  },
+  {
+    "id": "tabletApp",
+    "interface": "TabletApp",
+    "name": "Instruct",
+    "args": [
+      "get high risk conditions"
+    ]
+  },
+  {
+    "id": "tabletApp",
+    "interface": "TabletApp",
+    "name": "ConfirmHighRiskConditionsEntered",
+    "args": []
+  },
+  {
+    "id": "tabletApp",
+    "interface": "TabletApp",
+    "name": "Instruct",
+    "args": [
+      "get 3 bucket measurements"
+    ]
+  },
+  {
+    "id": "datastore",
+    "interface": "Datastore",
+    "name": "Obtain",
+    "args": [
+      "HR"
+    ]
+  },
+  {
+    "id": "datastore",
+    "interface": "Datastore",
+    "name": "Obtain",
+    "args": [
+      "BP Sys"
+    ]
+  },
+  {
+    "id": "datastore",
+    "interface": "Datastore",
+    "name": "Obtain",
+    "args": [
+      "Temp"
+    ]
+  },
+  {
+    "id": "datastore",
+    "interface": "Datastore",
+    "name": "Obtain",
+    "args": [
+      "Pulse Quality"
+    ]
+  },
+  {
+    "id": "datastore",
+    "interface": "Datastore",
+    "name": "Obtain",
+    "args": [
+      "Behavior"
+    ]
+  },
+  {
+    "id": "datastore",
+    "interface": "Datastore",
+    "name": "Obtain",
+    "args": [
+      "Capillary Refill"
+    ]
+  },
+  {
+    "id": "datastore",
+    "interface": "Datastore",
+    "name": "Obtain",
+    "args": [
+      "Skin Color"
+    ]
+  },
+  {
+    "id": "tabletApp",
+    "interface": "TabletApp",
+    "name": "SepsisDiagnosis",
+    "args": [
+      false
+    ]
+  }
+]

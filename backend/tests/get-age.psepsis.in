@@ -1,0 +1,12 @@
+[
+  {
+    "id": "tabletApp",
+    "action": "broadcast",
+    "eventName": "StartScreening",
+    "eventArgs": [],
+    "waitFor":
+      { "name" : "StartGUI"
+      }
+  },
+  { "action": "exit" }
+]
