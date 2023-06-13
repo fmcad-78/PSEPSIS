@@ -263,10 +263,5 @@ async def test_antibiotic_therapy_immunosuppressed_no_penicillin_recent_antibiot
     await run_exec_test( 'antibiotic-therapy-immunosuppressed-no-penicillin-recent-antibiotics-fungal-risk'
                        , psepsis_exec_pgm)
 
-@pytest.mark.asyncio
-async def test_antibiotic_therapy_infant_staph_risk(psepsis_exec_pgm):
-    await run_exec_test( 'antibiotic-therapy-infant-staph-risk'
-
-
 def test_model_check(psepsis_mcheck_pgm):
     run_mcheck_test(psepsis_mcheck_pgm, '"<stuck>true</stuck>"')
