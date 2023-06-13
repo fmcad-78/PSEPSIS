@@ -2,5 +2,5 @@
 set -e
 
 cd ~/PSEPSIS/backend/ext/medik-semantics && make deps && make build-execution && make build-model-check
+./build.sh
 cd ~/PSEPSIS/backend && pytest test_backend.py --log-cli-level=INFO
-

@@ -2,14 +2,15 @@ from pathlib import Path
 from fractions import Fraction
 from data import OrganDt, Patient, DrugHist
 from dataclasses import asdict
-from backend_env import kompiled_exec_dir, psepsis_pgm, set_env
+from backend_env import kompiled_exec_dir, guidelines_pgm, driver_pgm, set_env
 from wrapper import ExecutionWrapper
 
 import os
 import websockets
+import tempfile
 
-import argparse, asyncio, concurrent, functools, json, logging, os, sys, threading, time
-
+import argparse, asyncio, concurrent, functools, json, logging, os, sys, threading, time, utils
+from utils import combined_temp_file
 #==== Common Helpers =====
 
 def _broadcast(interface_id, event_name, event_args=[]):
@@ -53,7 +54,7 @@ class StubProcess:
 
     async def feed_commands(self):
         for command in self.commands:
-            if command.get('name') != 'Instruct':
+            if command.get('name') not in ['Instruct', 'RecommendDrug', 'Recommend']:
                 continue
             await self.feed_event.wait()
             await self.to_app_queue.put(command)
@@ -109,8 +110,13 @@ class MedikHandler(ExecutionWrapper):
 
         await asyncio.gather(self.wrapper_task, from_k_task)
 
-    def __init__(self, to_k_queue, from_k_queue, to_app_queue, kompiled_exec_dir, psepsis_pgm, datastore):
-        super().__init__(to_k_queue, from_k_queue, kompiled_exec_dir, psepsis_pgm)
+    def __init__(self, to_k_queue, from_k_queue, to_app_queue, kompiled_exec_dir, guidelines_pgm, datastore):
+        self.tmp_path = tempfile.TemporaryDirectory()
+        psepsis_exec_pgm_path = combined_temp_file( Path(self.tmp_path.name)
+                                                  , [ guidelines_pgm
+                                                    , driver_pgm ]
+                                                  , 'exec-combined.medik')
+        super().__init__(to_k_queue, from_k_queue, kompiled_exec_dir, psepsis_exec_pgm_path)
         self.to_app_queue = to_app_queue
         self.datastore = datastore
 
@@ -241,6 +247,8 @@ async def main(app_process, k_process, portal_process):
     for task in pending:
         task.cancel()
 
+    medik_task.tmp_path.cleanup()
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='PSepsis Middleware')
     parser.add_argument( '-dp'
@@ -275,7 +283,7 @@ if __name__ == "__main__":
                                 , from_k_queue
                                 , to_app_queue
                                 , kompiled_exec_dir
-                                , psepsis_pgm
+                                , guidelines_pgm
                                 , datastore )
     app_process = AppProcess(args.user_port, to_k_queue, to_app_queue, datastore)
     portal_process = DataPortalProcess(args.data_port, to_k_queue, to_app_queue, datastore)
