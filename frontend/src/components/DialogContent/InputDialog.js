@@ -13,6 +13,7 @@ import NumericInput from "./NumericInput";
 import Checklist from "./Checklist";
 import PlainDialog from "./PlainDialog";
 import LineGraph from "../CollapsiblePanel/LineGraph";
+import ThreeBucket from "./ThreeBucket";
 import { DialogConfig } from "../../resources/DialogConfig";
 
 const InputContent = (args) => {
@@ -25,6 +26,8 @@ const InputContent = (args) => {
       return <PlainDialog { ...{ text:args.originalArgs.slice(1) }}/>
     case "linegraph":
       return <LineGraph {...{treatmentName:'fluid'}}/>
+    case "threebucket":
+      return <ThreeBucket />
     default:
       return <></>
   }
@@ -119,7 +122,7 @@ const InputDialog = ({ open, setOpen, info }) => {
   }
 
   return (
-    <Dialog open={open}>
+    <Dialog open={open} maxWidth={'100vw'}>
       <DialogTitle>{config.title}</DialogTitle>
       <DialogContent>
         <InputContent {...{
